@@ -1,0 +1,9 @@
+env/
+*.pyc
+db.sqlite3
+__pycache__
+.idea
+.env
+_build/
+.tar
+.tar.gz

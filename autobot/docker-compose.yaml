@@ -1,0 +1,31 @@
+version: "3.3"
+services:
+
+  dj-autobot:
+    build: .
+    container_name: dj-autobot
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py wait_for_db &&
+             python manage.py bot"
+
+    volumes:
+      - .:/autobot
+    environment:
+      - DEBUG=1
+      - TOKEN_TG=1950838745:AAEWbkdOGhs8mtU7EcxIs6maf1EvYI8Kfz8
+
+  dj-admin:
+    build: .
+    container_name: dj-admin
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/autobot
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+    depends_on:
+      - dj-autobot
