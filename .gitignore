@@ -5,5 +5,5 @@ __pycache__
 .idea
 .env
 _build/
-.tar
-.tar.gz
+*.tar
+*.tar.gz
